@@ -9,7 +9,7 @@
     "build:1": "rimraf dist",
     "build:2": "mkdirp dist",
     "build:3": "rollup index.mjs -o dist/built.js --format cjs",
-    "build:4": "pkg dist/built.js --targets win --out-path dist"
+    "build:4": "pkg dist/built.js --targets mac,win --out-path dist"
   },
   "bin": "index.mjs",
   "pkg": {
