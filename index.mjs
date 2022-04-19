@@ -26,7 +26,7 @@ import fs from 'fs'
         const title = await page.$eval('.s-plain-card__title .s-plain-card__title-wrapper', title => title.textContent.trim())
         const author = await page.$eval('.s-plain-card__author a', author => author.textContent.trim())
         const broker = await page.$eval('.s-plain-card__broker a', author => author.textContent.trim())
-        const leverage = await page.$eval('.s-plain-card__leverage', author => author.textContent.trim())
+        const leverage = await page.$eval('.s-plain-card__leverage', author => author.textContent.trim().replace(':', 'x'))
         var details = { signal, title, author, broker, leverage }
 
         const infoValues = await page.$$eval(
