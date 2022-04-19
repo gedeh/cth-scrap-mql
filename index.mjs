@@ -25,11 +25,13 @@ import fs from 'fs'
 
         const title = await page.$eval('.s-plain-card__title .s-plain-card__title-wrapper', title => title.textContent.trim())
         const author = await page.$eval('.s-plain-card__author a', author => author.textContent.trim())
+        const broker = await page.$eval('.s-plain-card__broker a', author => author.textContent.trim())
+        const leverage = await page.$eval('.s-plain-card__leverage', author => author.textContent.trim())
+        var details = { signal, title, author, broker, leverage }
+
         const infoValues = await page.$$eval(
             '#left-panel.sidebar > div.s-list-info:nth-of-type(2) .s-list-info__item .s-list-info__label + .s-list-info__value',
             items => items.map(item => item.textContent.trim()))
-
-        var details = { signal, title, author }
         infoValues.forEach((info, index) => {
             switch (index) {
                 case 0:
@@ -77,7 +79,7 @@ import fs from 'fs'
         const statsValues = await page.$$eval(
             'div#tab_content_stats div#tradeDataColumns div.s-data-columns > div.s-data-columns__column:first-child div.s-data-columns__item div.s-data-columns__value',
             items => items.map(item => item.textContent.trim()))
-            statsValues.forEach((stat, index) => {
+        statsValues.forEach((stat, index) => {
             switch (index) {
                 case 1:
                     details['profit-trades'] = stat
@@ -93,7 +95,7 @@ import fs from 'fs'
         result.push(details)
     }
 
-    stringify(result, { header: true, quoted_string: true }, (error, data) => {
+    stringify(result, { header: true, quoted: true }, (error, data) => {
         if (error) {
             const diagnostic = `Error conversting result into CSV file: ${error}`
             throw new Error(diagnostic, error)
