@@ -9,7 +9,7 @@
     "build:1": "rimraf dist",
     "build:2": "mkdirp dist",
     "build:3": "rollup index.mjs -o dist/built.js --format cjs",
-    "build:4": "pkg dist/built.js --targets mac,win --out-path dist"
+    "build:4": "pkg --public dist/built.js --targets mac,win --out-path dist"
   },
   "bin": "index.mjs",
   "pkg": {
@@ -23,6 +23,7 @@
   "author": "gedehnok",
   "license": "MIT",
   "dependencies": {
+    "csv-stringify": "^6.0.5",
     "puppeteer-core": "^13.5.2"
   },
   "devDependencies": {
