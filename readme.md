@@ -2,7 +2,7 @@
 
 ## Setup
 
-1. Close this repository
+1. Clone this repository
 1. Install Node v14
 1. Run **`npm install`**
 1. Configure location of Google Chrome and Signal ID to scrape in **config.json**
