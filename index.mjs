@@ -23,11 +23,13 @@ import fs from 'fs'
         await page.goto(`https://www.mql5.com/en/signals/${signal}?source=Unknown`, { waitUntil: 'domcontentloaded'});
         await page.screenshot({ path: `${resultDir}/${signal}.png` });
 
-        const title = await page.$eval('.s-plain-card__title .s-plain-card__title-wrapper', title => title.textContent.trim())
-        const author = await page.$eval('.s-plain-card__author a', author => author.textContent.trim())
-        const broker = await page.$eval('.s-plain-card__broker a', author => author.textContent.trim())
-        const leverage = await page.$eval('.s-plain-card__leverage', author => author.textContent.trim().replace(':', 'x'))
-        var details = { signal, title, author, broker, leverage }
+        const title = await page.$eval('.s-plain-card__title .s-plain-card__title-wrapper', element => element.textContent.trim())
+        const author = await page.$eval('.s-plain-card__author a', element => element.textContent.trim())
+        const broker = await page.$eval('.s-plain-card__broker a', element => element.textContent.trim())
+        const leverage = await page.$eval('.s-plain-card__leverage', element => element.textContent.trim().replace(':', 'x'))
+        const age = await page.$eval('.s-indicators__item-desc_weeks span', element => element.textContent.trim().replace(':', 'x'))
+
+        var details = { signal, title, author, age, broker, leverage }
 
         const infoValues = await page.$$eval(
             '#left-panel.sidebar > div.s-list-info:nth-of-type(2) .s-list-info__item .s-list-info__label + .s-list-info__value',
